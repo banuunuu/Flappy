@@ -22,6 +22,12 @@ public class Game {
 	private ArrayList<Updatable> updatables = new ArrayList<>();
 	private ArrayList<Renderable> renderables = new ArrayList<>();
 	
+	JFrame menu;
+	
+	public Game(JFrame menu) {
+		this.menu = menu;
+	}
+	
 	public void addUpdatable(Updatable u) {
 		updatables.add(u);
 	}
@@ -41,7 +47,7 @@ public class Game {
 	public void start() {
 		 //Init window: canvas and jFrame
 		Dimension gameSize = new Dimension(Game.WIDTH, Game.HEIGHT); 
-		JFrame gameWindow = new JFrame(gameName);
+		JFrame gameWindow = menu;//new JFrame(gameName);
 		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameWindow.setSize(gameSize); 
 		gameWindow.setResizable(false);
