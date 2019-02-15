@@ -1,11 +1,13 @@
 package game;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Input implements /*ActionListener,*/ KeyListener {
+public class Input implements KeyListener {
 
 	private boolean spacePressed = false;
 	private boolean spaceReleased = true;
@@ -26,6 +28,15 @@ public class Input implements /*ActionListener,*/ KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE && spaceReleased) {
 			spacePressed = true;
 			spaceReleased = false;
+			
+			System.out.println("testar gör något \n");
+		}	
+		
+		
+		if(e.getKeyCode() == KeyEvent.VK_UP ) {
+		
+			System.out.println("testar gör något \n");
+		
 		}			
 	}
 
@@ -41,4 +52,6 @@ public class Input implements /*ActionListener,*/ KeyListener {
 	public void keyTyped(KeyEvent e) {
 		
 	}
+
+
 }
