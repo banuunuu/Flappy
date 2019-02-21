@@ -5,22 +5,20 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Observable;
 
-public class Bird implements Updatable, Renderable {
+
+//använda observable
+public class Bird extends Observable implements Updatable, Renderable {
 	
 	private float x, y; // Position
 	private float yVel; // Current y-velocity of bird
 	private float baseYVel = -6.0f; //Velocity by default, i.e. going up (java y-axis is inverse
 	private float gravity = 0.25f; //gravity pulling bird down
-	
-	
-	
-	
+	private final float BASEGRAVITY = 0.25f;
 	private Pipes pipes;
 	private int scoredPipe = 0; // Highscore
-	
 	private int score = 0;
-	
 	private Font gameFont = new Font("Arial", Font.BOLD, 30);
 	
 	private BufferedImage flapUp;
@@ -44,7 +42,10 @@ public class Bird implements Updatable, Renderable {
 	public void resetBird() { //at object collision i.e. game-over
 		x = 100;
 		y = 100;
-		yVel = baseYVel;
+		//yVel = baseYVel;
+		
+		yVel = 0;
+		gravity = 0;	
 	}
 	
 	private void flap() {
@@ -62,6 +63,10 @@ public class Bird implements Updatable, Renderable {
 		}
 		
 		if(input.isSpacePressed()) {
+			
+			//start gravity
+			gravity = BASEGRAVITY;
+			
 			flap();
 		}
 		
@@ -69,14 +74,22 @@ public class Bird implements Updatable, Renderable {
 		float pipeX = pipeCoords[0];
 		float pipeY = pipeCoords[1];
 		
+		
+		//collision
 		if((x >= pipeX && x <= pipeX + pipes.getPipeWidth() 
 			&& (y <= pipeY || y >=pipeY + pipes.getPipeVertitalSpacing()))
-			|| y >= Game.HEIGHT) {
+			|| y >= Menu.HEIGHT) {
 			
 			pipes.resetPipes();
 			resetBird();
+			int temp = score;
 			score = 0;  // RESETS SCORE
+//<<<<<<< HEAD
 			
+//=======
+			setChanged();
+			notifyObservers(temp);  
+//>>>>>>> branch 'master' of https://github.com/banuunuu/Flappy.git
 		}
 		else {
 			int currentPipeID = pipes.getCurrentPipeID();

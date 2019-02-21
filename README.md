@@ -1,2 +1,0 @@
-# Flappy
-Flap a bird
