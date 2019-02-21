@@ -76,6 +76,7 @@ public class Bird implements Updatable, Renderable {
 			pipes.resetPipes();
 			resetBird();
 			score = 0;  // RESETS SCORE
+			
 		}
 		else {
 			int currentPipeID = pipes.getCurrentPipeID();

@@ -16,6 +16,12 @@ public class Menu {
 		new Thread(new Start(new JFrame())).start();
 	});
 	menu.add(startButton);
+	JButton highScore = new JButton("Highscore");
+	highScore.addActionListener(e -> {
+		// Skriv här
+		new Thread(new Highscores()).start();
+	});
+	menu.add(highScore);
 	menu.pack();
 	menu.setDefaultCloseOperation(1);
 	menu.setVisible(true);
