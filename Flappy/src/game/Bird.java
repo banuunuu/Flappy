@@ -82,12 +82,10 @@ public class Bird extends Observable implements Updatable, Renderable {
 			
 			pipes.resetPipes();
 			resetBird();
-			
 			int temp = score;
 			score = 0;  // RESETS SCORE
 			setChanged();
-			notifyObservers(temp);
-            
+			notifyObservers(temp);  
 		}
 		else {
 			int currentPipeID = pipes.getCurrentPipeID();

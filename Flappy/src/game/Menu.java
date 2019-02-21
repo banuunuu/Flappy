@@ -9,15 +9,11 @@ import java.util.Observer;
 import javax.swing.*;
 
 public class Menu implements Observer {
-	
 	public final static int WIDTH = 800, HEIGHT = 600;
-	
 	private String gameName = "Flaccidbird";
-	
 	private Game g;
 	private JFrame menu;
 	public Menu() {
-
 		makeMenu();
 		init();
 	}
@@ -96,7 +92,6 @@ public class Menu implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		
 		if(arg0 instanceof Bird && arg1 instanceof Integer) {
-		
 			//Sam du kanske kan använda denna score för server
 			int LastScore = (Integer) arg1;
 			//interrupt game Loop
