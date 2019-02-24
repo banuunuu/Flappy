@@ -63,17 +63,14 @@ public class Bird extends Observable implements Updatable, Renderable {
 		}
 		
 		if(input.isSpacePressed()) {
-			
 			//start gravity
 			gravity = BASEGRAVITY;
-			
 			flap();
 		}
 		
 		float[] pipeCoords = pipes.getCurrentPipe();
 		float pipeX = pipeCoords[0];
 		float pipeY = pipeCoords[1];
-		
 		
 		//collision
 		if((x >= pipeX && x <= pipeX + pipes.getPipeWidth() 
@@ -84,12 +81,8 @@ public class Bird extends Observable implements Updatable, Renderable {
 			resetBird();
 			int temp = score;
 			score = 0;  // RESETS SCORE
-//<<<<<<< HEAD
-			
-//=======
 			setChanged();
 			notifyObservers(temp);  
-//>>>>>>> branch 'master' of https://github.com/banuunuu/Flappy.git
 		}
 		else {
 			int currentPipeID = pipes.getCurrentPipeID();

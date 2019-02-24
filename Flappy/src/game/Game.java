@@ -59,8 +59,6 @@ public class Game implements Runnable{
 	//Behöver förkorta den här funktionen
 	private void start() {
 		Dimension gameSize = new Dimension(Game.WIDTH, Game.HEIGHT); 
-		
-		
 		game.setSize(gameSize);
 		game.setMinimumSize(gameSize);
 		game.setMaximumSize(gameSize);
@@ -158,7 +156,4 @@ public class Game implements Runnable{
 		else
 			return false;	
 	}
-
-
-
 }

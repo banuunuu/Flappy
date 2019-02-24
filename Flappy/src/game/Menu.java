@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.TextField;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
@@ -13,7 +14,7 @@ public class Menu implements Observer {
 	private Game g;
 	private JFrame menu;
 	private JPanel panel;
-	private JPanel save;
+	JTextArea txt;
 
 
 	public Menu() {
@@ -34,7 +35,7 @@ public class Menu implements Observer {
 		//menu.setResizable(false);
 		panel = new JPanel();
 		panel.setSize(gameSize);
-		panel.setLayout(new GridLayout(2,1));
+		panel.setLayout(new GridLayout(3,3));
 		JButton startButton = new JButton("Start ",new ImageIcon(this.getClass().getResource("/start.jpg")));
 		startButton.addActionListener(e -> {
 			g = new Game(this);
@@ -48,8 +49,22 @@ public class Menu implements Observer {
 		HS_off.addActionListener(e -> {
 			new Thread(new Highscores()).start();
 		});
-
 		panel.add(HS_off);
+		
+		JPanel label = new JPanel();
+		label.setLayout(new BoxLayout(label, BoxLayout.X_AXIS));
+		
+		 label.add(new JLabel("Enter username :"));
+		
+		txt = new JTextArea(200,10);
+		txt.setText("Username66");
+	    label.add(txt);
+	    label.add(new JLabel(new ImageIcon(this.getClass().getResource("/unnamed.png"))));
+	    
+	   
+	
+		
+	    panel.add(label);
 		menu.add(panel);
 		menu.pack();
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,8 +101,9 @@ public class Menu implements Observer {
 		if(arg0 instanceof Bird && arg1 instanceof Integer) {
 			//Sam du kanske kan använda denna score för server
 			int LastScore = (Integer) arg1;
+			String username = txt.getText();
 
-			System.out.println("Test: Lastscore was " + LastScore+ "\n");
+			System.out.println("Test: " + username + LastScore+ "\n");
 
 			//interrupt game Loop
 			g.activity.interrupt();
