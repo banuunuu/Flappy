@@ -13,21 +13,15 @@ import java.awt.Graphics2D;
 
 
 public class Game implements Runnable{
-
 	public Thread activity = new Thread(this);
 	public final static int WIDTH = 800, HEIGHT = 600;
-
 	private String gameName = "Flaccidbird";
-
 	private Canvas game = new Canvas();
-
 	private Input input;
-
 	private ArrayList<Updatable> updatables = new ArrayList<>();
 	private ArrayList<Renderable> renderables = new ArrayList<>();
-
-	JFrame menu;
-	Menu test;
+	private JFrame menu;
+	private Menu test;
 
 	public Game(Menu test) {
 		this.test = test;
@@ -63,28 +57,24 @@ public class Game implements Runnable{
 		game.setMinimumSize(gameSize);
 		game.setMaximumSize(gameSize);
 		game.setPreferredSize(gameSize);
-		game.setFocusable(true);
 		menu.add(game);
 		//Init input
 		input = new Input();
 		game.addKeyListener(input);
-
 		//Game loop
 		final int TICKS_PER_SECOND = 60; //one update of the game loop, 60fps
 		final int TIME_PER_TICK = 1000 / TICKS_PER_SECOND; //in milliseconds
 		final int MAX_FRAMESKIPS = 5; //max amount of updates per render
-
 		long nextGameTick = System.currentTimeMillis(); //lets us make time-based calculations in-game
 		int loops;
 		float interpolation; //gives number of times we have updated for each render, sync objects with rendered frame
-
 		long timeAtLastFPSCheck = 0; //check frames per second, each second
 		int ticks = 0;
-
+		game.requestFocus();
 		while (true) {
 			//Updating
 			loops = 0; //max 5, after 5 game has to be rendered
-
+			
 			while (System.currentTimeMillis() > nextGameTick && loops < MAX_FRAMESKIPS) {
 				update(); //loops through every updatable object
 				ticks++; //update means a game tick
@@ -115,10 +105,6 @@ public class Game implements Runnable{
 			}	
 		}
 	}
-
-
-
-
 	private void update() {
 		for(Updatable u : updatables) {
 			u.update(input);
@@ -145,15 +131,13 @@ public class Game implements Runnable{
 
 
 	private boolean playAgain()
-	{
-		int value = JOptionPane.showConfirmDialog(null,
-				"Play again?", "GAME OVER ", JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE,
-				new ImageIcon(this.getClass().getResource("/start.jpg"))); 
-
-		if(value == 0)
-			return true;
-		else
-			return false;	
+	{		int value = JOptionPane.showConfirmDialog(null,
+			"Play again?", "GAME OVER ", JOptionPane.YES_NO_OPTION,
+			JOptionPane.QUESTION_MESSAGE,
+			new ImageIcon(this.getClass().getResource("/start.jpg"))); 
+	if(value == 0)
+		return true;
+	else
+		return false;	
 	}
 }

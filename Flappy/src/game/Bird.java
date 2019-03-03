@@ -26,9 +26,7 @@ public class Bird extends Observable implements Updatable, Renderable {
 	
 	public Bird(Pipes pipes) {
 		resetBird();
-		
 		this.pipes = pipes;
-		
 		try {
 			flapUp =  Sprite.getSprite("/bird_up.png");
 			flapDown = Sprite.getSprite("/bird_down.png");
@@ -38,15 +36,12 @@ public class Bird extends Observable implements Updatable, Renderable {
 		}
 	}
 	
-	
 	public void resetBird() { //at object collision i.e. game-over
 		x = 100;
-		y = 100;
-		//yVel = baseYVel;
-		
+		y = 100;	
 		yVel = 0;
 		gravity = 0;	
-	}
+		}
 	
 	private void flap() {
 		yVel = baseYVel;
@@ -56,27 +51,22 @@ public class Bird extends Observable implements Updatable, Renderable {
 	public void update(Input input) {
 		y += yVel;
 		yVel += gravity;
-		
 		if (y < 0) {
 			y = 0;
 			yVel = 0;
 		}
-		
 		if(input.isSpacePressed()) {
 			//start gravity
 			gravity = BASEGRAVITY;
 			flap();
 		}
-		
 		float[] pipeCoords = pipes.getCurrentPipe();
 		float pipeX = pipeCoords[0];
 		float pipeY = pipeCoords[1];
-		
 		//collision
 		if((x >= pipeX && x <= pipeX + pipes.getPipeWidth() 
 			&& (y <= pipeY || y >=pipeY + pipes.getPipeVertitalSpacing()))
-			|| y >= Menu.HEIGHT) {
-			
+			|| y >= Menu.HEIGHT) {	
 			pipes.resetPipes();
 			resetBird();
 			int temp = score;
@@ -91,13 +81,10 @@ public class Bird extends Observable implements Updatable, Renderable {
 		}
 	}
 	
-	
 	@Override
 	public void render(Graphics2D g, float interpolation) {
 		g.setColor(Color.BLUE);
-		
 		g.drawImage(yVel <= 0 ? flapUp : flapDown, (int) x, (int) (y + (yVel * interpolation)), null);
-		
 		g.setFont(gameFont);
 		g.drawString("Score :" + score, 20, 50);
 	}

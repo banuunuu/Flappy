@@ -14,19 +14,12 @@ public class Menu implements Observer {
 	private Game g;
 	private JFrame menu;
 	private JPanel panel;
-	JTextArea txt;
-
+	private JTextArea txt;
 
 	public Menu() {
 		makeMenu();
-		//init();
 	}
 
-
-	//fråga  om JFrame om det är bättre om olika öppnas eller inte 
-	//det blir mindre kohesion om olika frames används
-	//då behöver jag bara använda setVisible
-	//och behöver inte återvända till Main eller?
 	private void makeMenu() {
 		Dimension gameSize = new Dimension(WIDTH, HEIGHT); 
 		menu = new JFrame();
@@ -40,7 +33,7 @@ public class Menu implements Observer {
 		startButton.addActionListener(e -> {
 			g = new Game(this);
 			init();
-			menu.getContentPane().removeAll();	
+			menu.getContentPane().removeAll();
 			g.activity.start();	
 		});
 
@@ -50,20 +43,15 @@ public class Menu implements Observer {
 			new Thread(new Highscores()).start();
 		});
 		panel.add(HS_off);
-		
 		JPanel label = new JPanel();
 		label.setLayout(new BoxLayout(label, BoxLayout.X_AXIS));
-		
-		 label.add(new JLabel("Enter username :"));
-		
+		label.add(new JLabel("Enter username : "));
 		txt = new JTextArea(200,10);
-		txt.setText("Username66");
-	    label.add(txt);
-	    label.add(new JLabel(new ImageIcon(this.getClass().getResource("/unnamed.png"))));
-	    
-	   
-	
 		
+		//namnet på windows datorn används som standard
+		txt.setText(System.getProperty("user.name"));
+	    label.add(txt);
+	    label.add(new JLabel(new ImageIcon(this.getClass().getResource("/chs.png"))));
 	    panel.add(label);
 		menu.add(panel);
 		menu.pack();
@@ -77,40 +65,30 @@ public class Menu implements Observer {
 		menu.add(panel);
 	}	
 
-
 	public JFrame getFrame() {
-		return menu;
-	}
+		return menu;	
+		}
 
 	private void init() {
 		// Initialise game objects
 		Pipes p = new Pipes();
 		Bird b = new Bird(p);
 		b.addObserver(this);
-
 		// Add updatables and renderables
 		g.addRenderable(p);
 		g.addUpdatable(p);
 		g.addRenderable(b);
 		g.addUpdatable(b);
 	}
-
 	@Override
 	public void update(Observable arg0, Object arg1) {
-
 		if(arg0 instanceof Bird && arg1 instanceof Integer) {
 			//Sam du kanske kan använda denna score för server
 			int LastScore = (Integer) arg1;
 			String username = txt.getText();
-
-			System.out.println("Test: " + username + LastScore+ "\n");
-
+			System.out.println("Test: " + username + " " + LastScore+ "\n");
 			//interrupt game Loop
 			g.activity.interrupt();
 		}
 	}
 }
-
-
-
-
