@@ -1,6 +1,10 @@
 package game;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
@@ -80,10 +84,10 @@ public class Menu implements Observer {
 	}	
 
 	/**
-	* When called returns JFrame
-	* @return JFrame of the game
-	*/
-	
+	 * When called returns JFrame
+	 * @return JFrame of the game
+	 */
+
 	public JFrame getFrame() {
 		return menu;	
 	}
@@ -99,35 +103,42 @@ public class Menu implements Observer {
 		g.addRenderable(b);
 		g.addUpdatable(b);
 	}
-	
-	
-	
+
+
+
+
+	private void sendValue(int score, String name) {
+		String highscore = (score + " " + name);
+		try {
+			DatagramSocket socket = new DatagramSocket();
+			InetAddress addr = InetAddress.getLocalHost();
+			socket.send(new DatagramPacket(highscore.getBytes(), highscore.length(), addr, 6896));
+			socket.close();
+
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "IO error", "IO error", 1);
+		}
+	}
+
+
+
+
 	/**
-	* Read a line of text from standard input (the text
-	* terminal), and return it as a set of words.
-	*
-	* @param prompt A prompt to print to screen.
-	* @return A set of Strings, where each String is
-	* one of the words typed by the user
-	*/
-	
-	
-	
-	/**
-	*Interrupts the game by interrupting the thread
-	*stores score ffrom the game
-	*
-	* @param arg0 an Bird object
-	* @param arg1 an Integer containing the score
-	* @return 
-	*/
-	
+	 *Interrupts the game by interrupting the thread
+	 *stores score ffrom the game
+	 *
+	 * @param arg0 an Bird object
+	 * @param arg1 an Integer containing the score
+	 */
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(arg0 instanceof Bird && arg1 instanceof Integer) {
 			//Sam du kanske kan använda denna score för server
 			int LastScore = (Integer) arg1;
 			String username = txt.getText();
+			sendValue(LastScore, username);
+
 			System.out.println("Test: " + username + " " + LastScore+ "\n");
 			//interrupt game Loop
 			g.activity.interrupt();
