@@ -21,8 +21,13 @@ public class Menu implements Observer {
 	private JFrame menu;
 	private JPanel panel;
 	private JTextArea txt;
+	private Highscores h;
 
 	public Menu() {
+		
+		h = new Highscores();
+		h.activity.start();
+		
 		makeMenu();
 	}
 
@@ -54,7 +59,11 @@ public class Menu implements Observer {
 		panel.add(startButton);
 		JButton HS_off = new JButton("HIGHSCORE ",new ImageIcon(this.getClass().getResource("/photo.jpg")));
 		HS_off.addActionListener(e -> {
-			new Thread(new Highscores()).start();
+			//new Thread(new Highscores()).start();
+			//Highscores h = new Highscores();
+			//h.activity.start();
+			
+			h.setVisible(true);
 		});
 		panel.add(HS_off);
 		JPanel label = new JPanel();
@@ -103,9 +112,6 @@ public class Menu implements Observer {
 		g.addRenderable(b);
 		g.addUpdatable(b);
 	}
-
-
-
 
 	private void sendValue(int score, String name) {
 		String highscore = (score + " " + name);

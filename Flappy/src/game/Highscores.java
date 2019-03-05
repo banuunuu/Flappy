@@ -11,6 +11,9 @@ import javax.swing.*;
 
 public class Highscores extends JFrame implements Runnable {
 
+	
+	public Thread activity = new Thread(this);
+	
 	JLabel label;
 	InetAddress addr;
 	DatagramSocket socket;
@@ -38,7 +41,7 @@ public class Highscores extends JFrame implements Runnable {
 		add(title, BorderLayout.NORTH);
 		add(scoreGUI, BorderLayout.CENTER);
 		pack();
-		setVisible(true);
+		setVisible(false);
 
 	}
 
