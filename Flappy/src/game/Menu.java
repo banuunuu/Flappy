@@ -1,12 +1,14 @@
 package game;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.TextField;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
+
+/** 
+ * The Menu class is used for controlling
+ * the main menu
+ */
 
 public class Menu implements Observer {
 	public final static int WIDTH = 800, HEIGHT = 600;
@@ -19,6 +21,14 @@ public class Menu implements Observer {
 	public Menu() {
 		makeMenu();
 	}
+
+
+
+	/**
+	 * Makes the JFrame and components
+	 * such as START and Highscore button
+	 * start button starts a new game and thread when pressed
+	 */
 
 	private void makeMenu() {
 		Dimension gameSize = new Dimension(WIDTH, HEIGHT); 
@@ -47,12 +57,12 @@ public class Menu implements Observer {
 		label.setLayout(new BoxLayout(label, BoxLayout.X_AXIS));
 		label.add(new JLabel("Enter username : "));
 		txt = new JTextArea(200,10);
-		
+
 		//namnet på windows datorn används som standard
 		txt.setText(System.getProperty("user.name"));
-	    label.add(txt);
-	    label.add(new JLabel(new ImageIcon(this.getClass().getResource("/chs.png"))));
-	    panel.add(label);
+		label.add(txt);
+		label.add(new JLabel(new ImageIcon(this.getClass().getResource("/chs.png"))));
+		panel.add(label);
 		menu.add(panel);
 		menu.pack();
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,14 +70,23 @@ public class Menu implements Observer {
 		menu.setVisible(true);	
 	}
 
-
+	/**
+	 *Puts the Main-menu contentpane
+	 *on the JFrame(shows main-menu)
+	 *
+	 */
 	public void testMenu(){
 		menu.add(panel);
 	}	
 
+	/**
+	* When called returns JFrame
+	* @return JFrame of the game
+	*/
+	
 	public JFrame getFrame() {
 		return menu;	
-		}
+	}
 
 	private void init() {
 		// Initialise game objects
@@ -80,6 +99,29 @@ public class Menu implements Observer {
 		g.addRenderable(b);
 		g.addUpdatable(b);
 	}
+	
+	
+	
+	/**
+	* Read a line of text from standard input (the text
+	* terminal), and return it as a set of words.
+	*
+	* @param prompt A prompt to print to screen.
+	* @return A set of Strings, where each String is
+	* one of the words typed by the user
+	*/
+	
+	
+	
+	/**
+	*Interrupts the game by interrupting the thread
+	*stores score ffrom the game
+	*
+	* @param arg0 an Bird object
+	* @param arg1 an Integer containing the score
+	* @return 
+	*/
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(arg0 instanceof Bird && arg1 instanceof Integer) {
