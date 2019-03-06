@@ -1,5 +1,4 @@
 package game;
-
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -10,6 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import java.awt.Graphics2D;
+
+/** 
+ * The Game class contains
+ * has the game Loop
+ * 
+ */
 
 
 public class Game implements Runnable{
@@ -22,35 +27,83 @@ public class Game implements Runnable{
 	private ArrayList<Renderable> renderables = new ArrayList<>();
 	private JFrame menu;
 	private Menu test;
-
+	
+	
+	
+	/** 
+	 * The Game class contains
+	 * has the game Loop
+	 * @param test is a Menu object
+	 * 
+	 */
 	public Game(Menu test) {
 		this.test = test;
 		this.menu = test.getFrame();
 	}
+	
+	
+	/** 
+	 *???
+	 * @param u
+	 * 
+	 */
+	
 
 	public void addUpdatable(Updatable u) {
 		updatables.add(u);
 	}
-
+	
+	/** 
+	 *???
+	 * @param u
+	 * 
+	 */
 	public void removeUpdatable(Updatable u) {
 		updatables.remove(u);
 	}
+	
+	/** 
+	 *???
+	 * @param r
+	 * 
+	 */
 
 	public void addRenderable(Renderable r) {
 		renderables.add(r);
 	}
 
+	
+	/** 
+	 *???
+	 * @param r
+	 * 
+	 */
 	public void removeRenderable(Renderable r) {
 		renderables.remove(r);
 	}
 
+	
+	/** 
+	 *Called from Menu
+	 *Starts the thread and triggers start() funktion
+	 */
 	@Override
 	public void run() {
 		//TODO
 		start();	
 	}
 
-	//Behöver förkorta den här funktionen
+	
+
+	/** 
+	 *Is the Game Loop for the Game
+	 *Initiliazes the game frame
+	 *and Loop the game until
+	 *the thread is interrupted
+	 *Popup asks if you want to continue or not
+	 */
+	
+	//skulle kanske kunna förkorta ner den här funktionen
 	private void start() {
 		Dimension gameSize = new Dimension(Game.WIDTH, Game.HEIGHT); 
 		game.setSize(gameSize);

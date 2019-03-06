@@ -23,21 +23,20 @@ public class Menu implements Observer {
 	private JTextArea txt;
 	private Highscores h;
 
-	public Menu() {
-		
-		h = new Highscores();
-		h.activity.start();
-		
-		makeMenu();
-	}
-
-
-
+	
+	
 	/**
 	 * Makes the JFrame and components
 	 * such as START and Highscore button
 	 * start button starts a new game and thread when pressed
+	 * Also starts a new Highscore Thread
 	 */
+	
+	public Menu() {
+		h = new Highscores();
+		h.activity.start();
+		makeMenu();
+	}
 
 	private void makeMenu() {
 		Dimension gameSize = new Dimension(WIDTH, HEIGHT); 
@@ -86,7 +85,6 @@ public class Menu implements Observer {
 	/**
 	 *Puts the Main-menu contentpane
 	 *on the JFrame(shows main-menu)
-	 *
 	 */
 	public void testMenu(){
 		menu.add(panel);
@@ -126,13 +124,10 @@ public class Menu implements Observer {
 		}
 	}
 
-
-
-
 	/**
-	 *Interrupts the game by interrupting the thread
-	 *stores score ffrom the game
-	 *
+	 *Interrupts the game by interrupting the game thread
+	 *stores score from the game
+	 *Sends score and username to the HighscoreList
 	 * @param arg0 an Bird object
 	 * @param arg1 an Integer containing the score
 	 */

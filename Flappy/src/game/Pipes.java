@@ -1,11 +1,15 @@
 package game;
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Random;
 
-public class Pipes implements Renderable, Updatable {
 
+
+/** 
+ *Classen Pipe tar hand om hur roren skall
+ *genereras
+ */
+public class Pipes implements Renderable, Updatable {
 	private int pipeWidth = 100;
 	private int pipeHorizontalSpacing = 210;
 	private int pipeVerticalSpacing = 180;
@@ -23,17 +27,19 @@ public class Pipes implements Renderable, Updatable {
 
 	public Pipes() {
 		rand = new Random();
-
 		resetPipes();
 	}
+	
+
+	/** 
+	 *Method reset all the pipes
+	 */
 
 	public void resetPipes() {
 		currentPipe = 0; //First pipe
-
 		x1 = Menu.WIDTH * 2;
 		x2 = x1 + pipeWidth + pipeHorizontalSpacing;
 		x3 = x2 + pipeWidth + pipeHorizontalSpacing;
-
 		y1 = getRandomY();
 		y2 = getRandomY();
 		y3 = getRandomY();

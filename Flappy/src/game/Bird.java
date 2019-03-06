@@ -7,8 +7,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Observable;
 
-
-//använda observable
+/** 
+ *This class manages how
+ *the Bird should act
+ */
 public class Bird extends Observable implements Updatable, Renderable {
 	
 	private float x, y; // Position
@@ -36,6 +38,11 @@ public class Bird extends Observable implements Updatable, Renderable {
 		}
 	}
 	
+
+	/** 
+	 *Resets bird position
+	 *when collision with pipe
+	 */
 	public void resetBird() { //at object collision i.e. game-over
 		x = 100;
 		y = 100;	
@@ -46,6 +53,13 @@ public class Bird extends Observable implements Updatable, Renderable {
 	private void flap() {
 		yVel = baseYVel;
 	}
+	
+	
+
+	/** 
+	 *Manages how the bird moves
+	 *when player interacts
+	 */
 
 	@Override
 	public void update(Input input) {
