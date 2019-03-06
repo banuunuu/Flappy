@@ -131,7 +131,7 @@ public class Game implements Runnable{
 
 
 	private boolean playAgain()
-	{		int value = JOptionPane.showConfirmDialog(null,
+	{		int value = JOptionPane.showConfirmDialog(menu,
 			"Play again?", "GAME OVER ", JOptionPane.YES_NO_OPTION,
 			JOptionPane.QUESTION_MESSAGE,
 			new ImageIcon(this.getClass().getResource("/start.jpg"))); 
