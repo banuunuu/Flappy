@@ -13,7 +13,6 @@ import java.awt.Graphics2D;
 /** 
  * The Game class contains
  * has the game Loop
- * 
  */
 
 

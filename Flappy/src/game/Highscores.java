@@ -77,8 +77,20 @@ public class Highscores extends JFrame implements Runnable {
 		String str = "RequestScores";
 		try {
 			DatagramSocket socket = new DatagramSocket();
+			
+			
 			InetAddress addr = InetAddress.getLocalHost();
-			socket.send(new DatagramPacket(str.getBytes(), str.length(), addr, 6896));
+			
+			System.out.println(addr);
+			InetAddress addr2 = InetAddress.getByName("192.168.56.1");
+			
+		
+			
+			//InetAddress addr2 = InetAddress.getByAddress();
+			
+			
+			
+			socket.send(new DatagramPacket(str.getBytes(), str.length(), addr2, 6896));
 			socket.close();
 
 		} catch (IOException e) {
