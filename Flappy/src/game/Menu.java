@@ -10,10 +10,11 @@ import java.util.Observer;
 import javax.swing.*;
 
 /** 
+ * @author Aleksander Pantic
  * The Menu class is used for controlling
  * the main menu
+ * @version 2019-03-07
  */
-
 public class Menu implements Observer {
 	public final static int WIDTH = 800, HEIGHT = 600;
 	private String gameName = "Flaccidbird";
@@ -23,21 +24,23 @@ public class Menu implements Observer {
 	private JTextArea txt;
 	private Highscores h;
 
-	
-	
 	/**
 	 * Makes the JFrame and components
 	 * such as START and Highscore button
 	 * start button starts a new game and thread when pressed
 	 * Also starts a new Highscore Thread
 	 */
-	
 	public Menu() {
 		h = new Highscores();
 		h.activity.start();
 		makeMenu();
 	}
 
+	
+	/**
+	 * Produces the meny in frame
+	 * makes button 
+	 */
 	private void makeMenu() {
 		Dimension gameSize = new Dimension(WIDTH, HEIGHT); 
 		menu = new JFrame();
@@ -61,7 +64,7 @@ public class Menu implements Observer {
 			//new Thread(new Highscores()).start();
 			//Highscores h = new Highscores();
 			//h.activity.start();
-			
+
 			h.setVisible(true);
 		});
 		panel.add(HS_off);
@@ -131,7 +134,6 @@ public class Menu implements Observer {
 	 * @param arg0 an Bird object
 	 * @param arg1 an Integer containing the score
 	 */
-
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(arg0 instanceof Bird && arg1 instanceof Integer) {

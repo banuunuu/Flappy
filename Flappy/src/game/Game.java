@@ -14,8 +14,6 @@ import java.awt.Graphics2D;
  * The Game class contains
  * has the game Loop
  */
-
-
 public class Game implements Runnable{
 	public Thread activity = new Thread(this);
 	public final static int WIDTH = 800, HEIGHT = 600;
@@ -30,9 +28,7 @@ public class Game implements Runnable{
 	
 	
 	/** 
-	 * The Game class contains
-	 * has the game Loop
-	 * @param test is a Menu object
+	 * @param test is a Menu object from Meny
 	 * 
 	 */
 	public Game(Menu test) {
@@ -46,8 +42,6 @@ public class Game implements Runnable{
 	 * @param u
 	 * 
 	 */
-	
-
 	public void addUpdatable(Updatable u) {
 		updatables.add(u);
 	}
@@ -66,7 +60,6 @@ public class Game implements Runnable{
 	 * @param r
 	 * 
 	 */
-
 	public void addRenderable(Renderable r) {
 		renderables.add(r);
 	}
@@ -101,7 +94,6 @@ public class Game implements Runnable{
 	 *the thread is interrupted
 	 *Popup asks if you want to continue or not
 	 */
-	
 	//skulle kanske kunna förkorta ner den här funktionen
 	private void start() {
 		Dimension gameSize = new Dimension(Game.WIDTH, Game.HEIGHT); 
@@ -164,7 +156,6 @@ public class Game implements Runnable{
 	}
 
 	private void render(float interpolation) {  //renders all game objects
-
 		BufferStrategy b = game.getBufferStrategy();
 		if (b == null) {
 			game.createBufferStrategy(2); //create double buffer to insure user doesn't see screen getting cleared and re-rendered
