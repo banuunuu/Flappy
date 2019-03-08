@@ -3,7 +3,7 @@ package game;
 /** 
  * @author Aleksander Pantic
  * The main class is used to make
- * a Menu object
+ * a Menu object. Which is the basis of the game
  * @version 2019-03-07
  */
 

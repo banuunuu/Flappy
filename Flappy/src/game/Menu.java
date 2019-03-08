@@ -11,8 +11,10 @@ import javax.swing.*;
 
 /** 
  * @author Aleksander Pantic
- * The Menu class is used for controlling
- * the main menu
+ * The Menu class is responsible
+ * for the main menu
+ * It triggers other functions such
+ * as starting the game and viewing highscore
  * @version 2019-03-07
  */
 public class Menu implements Observer {
@@ -23,7 +25,7 @@ public class Menu implements Observer {
 	private JPanel panel;
 	private JTextArea txt;
 	private Highscores h;
-	private int avatar = 1;
+	private int avatar = 1; //1 = fågel, 2 = boll
 
 	/**
 	 * Makes the JFrame and components
@@ -67,13 +69,12 @@ public class Menu implements Observer {
 		});
 		panel.add(HS_off);
 		JPanel label = new JPanel();
-		label.setLayout(new GridLayout(3,5)); //(new BoxLayout(label, BoxLayout.X_AXIS));
+		label.setLayout(new GridLayout(3,5));
 	
 		
 		JButton bird = new JButton("Bird ",new ImageIcon(this.getClass().getResource("/test_ner.png")));
 		bird.addActionListener(e -> {
 			avatar = 1;
-			
 		});
 		
 		JButton ball = new JButton("Ball ",new ImageIcon(this.getClass().getResource("/bird_up.png")));
@@ -89,12 +90,7 @@ public class Menu implements Observer {
 		//namnet på windows datorn används som standard
 		txt.setText(System.getProperty("user.name"));
 		label.add(txt);
-		
-		
-		
 		label.add(new JLabel(new ImageIcon(this.getClass().getResource("/chs.png"))));
-		
-		
 		panel.add(label);
 		menu.add(panel);
 		menu.pack();
@@ -159,7 +155,6 @@ public class Menu implements Observer {
 			int LastScore = (Integer) arg1;
 			String username = txt.getText();
 			sendValue(LastScore, username);
-
 			System.out.println("Test: " + username + " " + LastScore+ "\n");
 			//interrupt game Loop
 			g.activity.interrupt();
