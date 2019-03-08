@@ -1,12 +1,16 @@
 package game;
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.awt.Color;
+
 
 import java.awt.Graphics2D;
 
@@ -97,6 +101,7 @@ public class Game implements Runnable{
 	//skulle kanske kunna förkorta ner den här funktionen
 	private void start() {
 		Dimension gameSize = new Dimension(Game.WIDTH, Game.HEIGHT); 
+		game.setBackground(Color.MAGENTA);
 		game.setSize(gameSize);
 		game.setMinimumSize(gameSize);
 		game.setMaximumSize(gameSize);
@@ -177,7 +182,7 @@ public class Game implements Runnable{
 	{		int value = JOptionPane.showConfirmDialog(menu,
 			"Play again?", "GAME OVER ", JOptionPane.YES_NO_OPTION,
 			JOptionPane.QUESTION_MESSAGE,
-			new ImageIcon(this.getClass().getResource("/start.jpg"))); 
+			new ImageIcon(this.getClass().getResource("/sturt.png"))); 
 	if(value == 0)
 		return true;
 	else

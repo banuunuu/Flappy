@@ -23,12 +23,13 @@ public class Menu implements Observer {
 	private JPanel panel;
 	private JTextArea txt;
 	private Highscores h;
+	private int avatar = 1;
 
 	/**
 	 * Makes the JFrame and components
 	 * such as START and Highscore button
 	 * start button starts a new game and thread when pressed
-	 * Also starts a new Highscore Thread
+	 * starts a new Highscore Thread
 	 */
 	public Menu() {
 		h = new Highscores();
@@ -38,19 +39,20 @@ public class Menu implements Observer {
 
 	
 	/**
-	 * Produces the meny in frame
-	 * makes button 
+	 * Initilizes the Frame
+	 * and constructs a main-menu
+	 * with start and hishscore buttons
 	 */
 	private void makeMenu() {
 		Dimension gameSize = new Dimension(WIDTH, HEIGHT); 
 		menu = new JFrame();
 		menu.setTitle(gameName);
 		menu.setSize(gameSize); 
-		//menu.setResizable(false);
+		menu.setResizable(false);
 		panel = new JPanel();
 		panel.setSize(gameSize);
 		panel.setLayout(new GridLayout(3,3));
-		JButton startButton = new JButton("Start ",new ImageIcon(this.getClass().getResource("/start.jpg")));
+		JButton startButton = new JButton("Start ",new ImageIcon(this.getClass().getResource("/sturt.png")));
 		startButton.addActionListener(e -> {
 			g = new Game(this);
 			init();
@@ -61,22 +63,38 @@ public class Menu implements Observer {
 		panel.add(startButton);
 		JButton HS_off = new JButton("HIGHSCORE ",new ImageIcon(this.getClass().getResource("/photo.jpg")));
 		HS_off.addActionListener(e -> {
-			//new Thread(new Highscores()).start();
-			//Highscores h = new Highscores();
-			//h.activity.start();
-
 			h.setVisible(true);
 		});
 		panel.add(HS_off);
 		JPanel label = new JPanel();
-		label.setLayout(new BoxLayout(label, BoxLayout.X_AXIS));
+		label.setLayout(new GridLayout(3,5)); //(new BoxLayout(label, BoxLayout.X_AXIS));
+	
+		
+		JButton bird = new JButton("Bird ",new ImageIcon(this.getClass().getResource("/test_ner.png")));
+		bird.addActionListener(e -> {
+			avatar = 1;
+			
+		});
+		
+		JButton ball = new JButton("Ball ",new ImageIcon(this.getClass().getResource("/bird_up.png")));
+		ball.addActionListener(e -> {
+			avatar = 2;
+		});
+		
+		label.add(bird);
+		label.add(ball);
 		label.add(new JLabel("Enter username : "));
 		txt = new JTextArea(200,10);
 
 		//namnet på windows datorn används som standard
 		txt.setText(System.getProperty("user.name"));
 		label.add(txt);
+		
+		
+		
 		label.add(new JLabel(new ImageIcon(this.getClass().getResource("/chs.png"))));
+		
+		
 		panel.add(label);
 		menu.add(panel);
 		menu.pack();
@@ -97,7 +115,6 @@ public class Menu implements Observer {
 	 * When called returns JFrame
 	 * @return JFrame of the game
 	 */
-
 	public JFrame getFrame() {
 		return menu;	
 	}
@@ -105,7 +122,7 @@ public class Menu implements Observer {
 	private void init() {
 		// Initialise game objects
 		Pipes p = new Pipes();
-		Bird b = new Bird(p);
+		Bird b = new Bird(p,avatar);
 		b.addObserver(this);
 		// Add updatables and renderables
 		g.addRenderable(p);
@@ -131,6 +148,7 @@ public class Menu implements Observer {
 	 *Interrupts the game by interrupting the game thread
 	 *stores score from the game
 	 *Sends score and username to the HighscoreList
+	 *Is called by the Observable class Bird
 	 * @param arg0 an Bird object
 	 * @param arg1 an Integer containing the score
 	 */
