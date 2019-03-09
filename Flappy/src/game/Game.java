@@ -7,7 +7,6 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 
@@ -15,8 +14,10 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 /** 
+ * @author Aleksander Pantic
  * The Game class contains
  * has the game Loop
+ * @version 2019-03-08
  */
 public class Game implements Runnable{
 	public Thread activity = new Thread(this);
@@ -28,9 +29,9 @@ public class Game implements Runnable{
 	private ArrayList<Renderable> renderables = new ArrayList<>();
 	private JFrame menu;
 	private Menu test;
-	
-	
-	
+
+
+
 	/** 
 	 * @param test is a Menu object from Meny
 	 * 
@@ -39,8 +40,8 @@ public class Game implements Runnable{
 		this.test = test;
 		this.menu = test.getFrame();
 	}
-	
-	
+
+
 	/** 
 	 *???
 	 * @param u
@@ -49,7 +50,7 @@ public class Game implements Runnable{
 	public void addUpdatable(Updatable u) {
 		updatables.add(u);
 	}
-	
+
 	/** 
 	 *???
 	 * @param u
@@ -58,7 +59,7 @@ public class Game implements Runnable{
 	public void removeUpdatable(Updatable u) {
 		updatables.remove(u);
 	}
-	
+
 	/** 
 	 *???
 	 * @param r
@@ -68,7 +69,7 @@ public class Game implements Runnable{
 		renderables.add(r);
 	}
 
-	
+
 	/** 
 	 *???
 	 * @param r
@@ -78,10 +79,10 @@ public class Game implements Runnable{
 		renderables.remove(r);
 	}
 
-	
+
 	/** 
 	 *Called from Menu
-	 *Starts the thread and triggers start() funktion
+	 *Starts the thread and triggers start() function
 	 */
 	@Override
 	public void run() {
@@ -89,7 +90,22 @@ public class Game implements Runnable{
 		start();	
 	}
 
-	
+
+
+	private void setUp() {
+		game.setBackground(Color.MAGENTA);
+		Dimension gameSize = new Dimension(Game.WIDTH, Game.HEIGHT); 
+		game.setSize(gameSize);
+		game.setMinimumSize(gameSize);
+		game.setMaximumSize(gameSize);
+		game.setPreferredSize(gameSize);
+		menu.add(game);
+		//Init input
+		input = new Input();
+		game.addKeyListener(input);
+		game.requestFocus();
+	}
+
 
 	/** 
 	 *Is the Game Loop for the Game
@@ -100,16 +116,8 @@ public class Game implements Runnable{
 	 */
 	//skulle kanske kunna förkorta ner den här funktionen
 	private void start() {
-		Dimension gameSize = new Dimension(Game.WIDTH, Game.HEIGHT); 
-		game.setBackground(Color.MAGENTA);
-		game.setSize(gameSize);
-		game.setMinimumSize(gameSize);
-		game.setMaximumSize(gameSize);
-		game.setPreferredSize(gameSize);
-		menu.add(game);
-		//Init input
-		input = new Input();
-		game.addKeyListener(input);
+		//initiziliazes Canvas frame
+		setUp();
 		//Game loop
 		final int TICKS_PER_SECOND = 60; //one update of the game loop, 60fps
 		final int TIME_PER_TICK = 1000 / TICKS_PER_SECOND; //in milliseconds
@@ -119,11 +127,11 @@ public class Game implements Runnable{
 		float interpolation; //gives number of times we have updated for each render, sync objects with rendered frame
 		long timeAtLastFPSCheck = 0; //check frames per second, each second
 		int ticks = 0;
-		game.requestFocus();
+		
 		while (true) {
 			//Updating
 			loops = 0; //max 5, after 5 game has to be rendered
-			
+
 			while (System.currentTimeMillis() > nextGameTick && loops < MAX_FRAMESKIPS) {
 				update(); //loops through every updatable object
 				ticks++; //update means a game tick

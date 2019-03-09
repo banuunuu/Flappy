@@ -11,7 +11,7 @@ import java.util.Observable;
  * @author
  *This class manages how
  *the Bird should act
- *@ve
+ *@version
  */
 public class Bird extends Observable implements Updatable, Renderable {
 	
@@ -32,21 +32,16 @@ public class Bird extends Observable implements Updatable, Renderable {
 		resetBird();
 		this.pipes = pipes;
 		try {
-			
 			if(avatar == 1) {
 			flapUp =  Sprite.getSprite("/test_ner.png"); //bird_up.png
 			flapDown = Sprite.getSprite("/test_up.png"); //bird_down.png
 			}
-			
 			else if(avatar == 2)
 			{
 				flapUp =  Sprite.getSprite("/bird_up.png"); //bird_up.png
 				flapDown = Sprite.getSprite("/bird_down.png"); //bird_down.png
 			}
-				
-				
-				
-				
+	
 		} catch (IOException ex) {
 			System.err.println(ex.getMessage());
 			System.exit(1);
@@ -73,7 +68,7 @@ public class Bird extends Observable implements Updatable, Renderable {
 
 	/** 
 	 *Manages how the bird moves
-	 *when player interacts
+	 *when player interacts with it
 	 */
 	@Override
 	public void update(Input input) {

@@ -13,7 +13,7 @@ import javax.swing.*;
  * @author Aleksander Pantic
  * The Menu class is responsible
  * for the main menu
- * It triggers other functions such
+ * the main-menu triggers other functions such
  * as starting the game and viewing highscore
  * @version 2019-03-07
  */
@@ -81,12 +81,10 @@ public class Menu implements Observer {
 		ball.addActionListener(e -> {
 			avatar = 2;
 		});
-		
 		label.add(bird);
 		label.add(ball);
 		label.add(new JLabel("Enter username : "));
 		txt = new JTextArea(200,10);
-
 		//namnet på windows datorn används som standard
 		txt.setText(System.getProperty("user.name"));
 		label.add(txt);
@@ -114,7 +112,11 @@ public class Menu implements Observer {
 	public JFrame getFrame() {
 		return menu;	
 	}
-
+	
+	
+	/**
+	 *Performs crucial setup for the game Loop
+	 */
 	private void init() {
 		// Initialise game objects
 		Pipes p = new Pipes();
